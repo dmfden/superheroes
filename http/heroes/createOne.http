@@ -1,0 +1,10 @@
+POST http://localhost:5000/api/heroes/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "nickname" : "TestUsdsessssadssfasfdsr32wwssw2s2sswswwwww",
+    "realName" : "name TestsdUssfassasfdwsssseswrwdssswswww3w2w22",
+    "originDescription": "testsssfsssasfd13swwwsswwssdd22w2",
+    "catchPhrase" : "Jeronimo3sfss2sdw2wsdw2",
+    "Superpowers": [10,2,4]
+}
