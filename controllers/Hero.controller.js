@@ -86,6 +86,7 @@ module.exports.getHeroPowers = async (req, res, next) => {
 }
 
 //UPDATE HERO
+// TODO check why POSTMAN recive full response, Oherwise local updateHero.http receive empty Superpowers in Response
 module.exports.updateOne = async (req, res, next) => {
     try {
         const { body, params: { heroId }, files } = req;
@@ -101,7 +102,6 @@ module.exports.updateOne = async (req, res, next) => {
             throw new NotFoundError(`No hero with id ${heroId}`);
         } 
 
-            // TODO check why POSTMAN recive full response, Oherwise local updateHero.http receive empty Superpowers in Response
             if(body?.Superpowers?.length) {
                 const powersSet = new Set(body.Superpowers);
                 const allPowers = await Superpower.findAll();
