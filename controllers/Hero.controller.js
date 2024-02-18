@@ -212,6 +212,12 @@ module.exports.deleteOne = async (req, res, next) => {
                 },
                 returning: true
             });
+
+            if(!deleted.length) {
+                throw new NotFoundError('Hero not found');
+            }
+
+
             res.status(200).send({ data: deleted });
         }
      catch (error) {
