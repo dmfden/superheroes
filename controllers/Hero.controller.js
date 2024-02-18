@@ -157,9 +157,8 @@ module.exports.updateOne = async (req, res, next) => {
 module.exports.getAll = async (req, res, next) => {
     try {
         const { pagination } = req;
-        const {query} = req;
        
-        const heros = await SuperHero.findAll({
+        const heroes = await SuperHero.findAll({
             include: [
                 {
                     model: Superpower,
@@ -176,7 +175,11 @@ module.exports.getAll = async (req, res, next) => {
             ...pagination
         });
 
-        res.status(200).send({ data: heros });
+        if (!heroes.length) {
+            throw new NotFoundError("No Heroes were founded");
+        }
+
+        res.status(200).send({ data: heroes });
     } catch (error) {
         next(error);
     }
