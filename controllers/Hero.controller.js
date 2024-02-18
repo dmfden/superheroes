@@ -153,17 +153,28 @@ module.exports.updateOne = async (req, res, next) => {
 }
 
 
-//GET HEROES WITH PAGINATION WITH LIMIT BY DEFAULT 5
+//GET HEROES WITH PAGINATION
 module.exports.getAll = async (req, res, next) => {
     try {
+        const { pagination } = req;
         const {query} = req;
-        console.log(query);
+       
         const heros = await SuperHero.findAll({
-            limit: query.limit ? query.limit : 5,
-            offset: query.offset ? query.offset : 0
+            include: [
+                {
+                    model: Superpower,
+                    attributes: ['id', 'ability'],
+                    through: {
+                        attributes: []
+                      }
+                },
+                {
+                    model: HeroImage,
+                    attributes: ['id','path'],
+                }
+            ],
+            ...pagination
         });
-
-        console.log(heros);
 
         res.status(200).send({ data: heros });
     } catch (error) {
